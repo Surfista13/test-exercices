@@ -1,4 +1,4 @@
-import {colorChoice, boxChoice} from './module'
+import {colorChoice, boxChoice} from './module.js'
 
 function colorChange () {
     let box = boxChoice ();
