@@ -1,0 +1,13 @@
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 20%;
+}
+
+#box1, #box2, #box3, #box4 {
+    border: 1px solid black ;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    color: aliceblue;   
+}
