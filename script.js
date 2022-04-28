@@ -4,34 +4,36 @@ const inventory = {
     woman: 500
 };
 
+
+function handleSuccess (successMessage) {
+    console.log(successMessage)
+}
+
+function handleReject(rejectMessage) {
+    console.log(rejectMessage)
+}
+
 function validStock () {
     return new Promise ((resolve, reject) => {
-        if (inventory.stock > 0) {
-            resolve('Stock dispo');
+        if (inventory.stock > 1) {
+            resolve(`stock OK avec ${inventory.stock} pièces`);
         } else {
-            reject('Rupture de stock');
+            reject(`rupture de stock`);
         }
     })
 }
 
-function validMan () {
+function validMan (successMessage) {
     return new Promise ((resolve, reject) => {
         if (inventory.man > 0) {
-            resolve('Personnel disponible')
+            resolve(`${successMessage} et personnel disponible`);
         } else {
-            reject('Personnel absent')
+            reject(`Personel indisponible malgré ${successMessage}`);
         }
     })
 }
 
-function handleSuccess (resolvedValue) {
-    console.log(resolvedValue);
-}
-function handleReject (rejectValue) {
-    console.log(rejectValue);
-}
-
-validStock()
-    .then(() => {return validMan()})
-    .then((sucessMessage) => {console.log(sucessMessage)})
-    .catch((errorMessage) => {console.log(errorMessage)})
+validStock() 
+    .then((sucessMessage) => {return validMan(sucessMessage)})
+    .then((sucessMessage) => {handleSuccess(sucessMessage)} )
+    .catch((rejectMessage) => {handleReject(rejectMessage)} )
