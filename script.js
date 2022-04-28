@@ -1,9 +1,8 @@
 const inventory = {
     stock: 10,
-    man: 0,
+    man: 10,
     woman: 500
 };
-
 
 function handleSuccess (successMessage) {
     console.log(successMessage)
@@ -26,14 +25,16 @@ function validStock () {
 function validMan (successMessage) {
     return new Promise ((resolve, reject) => {
         if (inventory.man > 0) {
-            resolve(`${successMessage} et personnel disponible`);
+            resolve(`Personnel disponible`);
         } else {
-            reject(`Personel indisponible malgré ${successMessage}`);
+            reject(`Personel indisponible`);
         }
     })
 }
 
-validStock() 
-    .then((sucessMessage) => {return validMan(sucessMessage)})
-    .then((sucessMessage) => {handleSuccess(sucessMessage)} )
-    .catch((rejectMessage) => {handleReject(rejectMessage)} )
+let myPromise = Promise.all([validStock(), validMan()]);
+
+
+myPromise 
+    .then((sucessMessage) => {console.log(sucessMessage)})
+    .catch((rejectMessage) => {console.log(rejectMessage)} )
